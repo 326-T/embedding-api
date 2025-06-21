@@ -6,6 +6,10 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.115.13",
+    "httpx>=0.28.1",
+    "pytest>=8.4.1",
+    "pytest-cov>=6.2.1",
+    "pytest-mock>=3.14.1",
     "sentence-transformers>=4.1.0",
     "uvicorn>=0.34.3",
 ]
@@ -17,3 +21,15 @@ target-version = "py313"
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+
+[tool.pytest.ini_options]
+markers = [
+    "ut: unit test"
+]
+addopts = "--cov=app --cov-report=term-missing --cov-fail-under=90"
+
+[tool.coverage.run]
+omit = [
+    "*/tests/*",
+    "*/__init__.py"
+]

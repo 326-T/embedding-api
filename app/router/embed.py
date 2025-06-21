@@ -3,7 +3,7 @@ from typing import Annotated, List
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 
-from app.repository import (
+from app.repository.sentence_transformer import (
     SentenceTransformerRepository,
     get_sentence_transformer_repository,
 )
@@ -26,11 +26,6 @@ class EmbeddingListResponse(BaseModel):
 
 
 router = APIRouter()
-
-
-@router.get("/health")
-async def health_check():
-    return
 
 
 @router.post("/embed")

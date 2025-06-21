@@ -6,12 +6,8 @@
 @contentType = application/json
 
 ### ヘルスチェック / ルートエンドポイント
-GET {{baseUrl}}/
-Accept: application/json
+GET {{baseUrl}}/health
 
-### OpenAPI ドキュメント確認
-GET {{baseUrl}}/docs
-Accept: text/html
 
 ### 単一テキストの埋め込み
 POST {{baseUrl}}/embed

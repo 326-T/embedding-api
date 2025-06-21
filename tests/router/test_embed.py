@@ -7,7 +7,7 @@ from pytest import fixture, mark
 from pytest_mock import MockerFixture
 
 from app.main import app
-from app.repository import (
+from app.repository.sentence_transformer import (
     SentenceTransformerRepository,
     get_sentence_transformer_repository,
 )
@@ -22,15 +22,6 @@ def sentence_transformer_repository(mocker: MockerFixture):
     repository.encode_texts.return_value = np.array([[0.1, 0.2, 0.3], [0.4, 0.5, 0.6]])
     app.dependency_overrides[get_sentence_transformer_repository] = lambda: repository
     return repository
-
-
-@mark.ut
-def test_health_check():
-    # when
-    response = client.get("/health")
-    # then
-    assert response.status_code == status.HTTP_200_OK
-    assert response.json() is None
 
 
 @mark.ut

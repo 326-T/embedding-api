@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 
-from app.handler import router
+from app.router import embed, health
 
 app = FastAPI(title="Embedding API", version="1.0.0")
 
-app.include_router(router)
+app.include_router(embed.router)
+app.include_router(health.router)
 
 if __name__ == "__main__":
     import uvicorn

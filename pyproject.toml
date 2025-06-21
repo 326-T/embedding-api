@@ -9,3 +9,11 @@ dependencies = [
     "sentence-transformers>=4.1.0",
     "uvicorn>=0.34.3",
 ]
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

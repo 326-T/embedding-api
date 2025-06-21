@@ -22,7 +22,7 @@ Content-Type: {{contentType}}
 }
 
 ### バッチ埋め込み（複数テキスト）
-POST {{baseUrl}}/embed_batch
+POST {{baseUrl}}/embed/batch
 Content-Type: {{contentType}}
 
 {

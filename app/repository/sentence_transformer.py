@@ -1,5 +1,5 @@
 from functools import lru_cache
-from typing import List
+from typing import Tuple
 
 import numpy as np
 from sentence_transformers import SentenceTransformer
@@ -14,8 +14,8 @@ class SentenceTransformerRepository:
         return self.model.encode(text)
 
     @lru_cache
-    def encode_texts(self, texts: List[str]) -> np.ndarray:
-        return self.model.encode(texts)
+    def encode_texts(self, texts: Tuple[str]) -> np.ndarray:
+        return self.model.encode(list(texts))
 
 
 @lru_cache(maxsize=1)

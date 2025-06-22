@@ -45,4 +45,4 @@ def test_embed_texts(sentence_transformer_repository: Mock):
     # then
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {"embeddings": [[0.1, 0.2, 0.3], [0.4, 0.5, 0.6]]}
-    sentence_transformer_repository.encode_texts.assert_called_once_with(texts)
+    sentence_transformer_repository.encode_texts.assert_called_once_with(tuple(texts))

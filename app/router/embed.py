@@ -46,5 +46,5 @@ async def embed_texts(
         SentenceTransformerRepository, Depends(get_sentence_transformer_repository)
     ],
 ):
-    embeddings = service.encode_texts(request.texts)
+    embeddings = service.encode_texts(tuple(request.texts))
     return EmbeddingListResponse(embeddings=embeddings.tolist())

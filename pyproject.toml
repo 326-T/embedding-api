@@ -6,10 +6,8 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.115.13",
-    "httpx>=0.28.1",
-    "pytest>=8.4.1",
-    "pytest-cov>=6.2.1",
-    "pytest-mock>=3.14.1",
+    "pgvector>=0.4.1",
+    "psycopg>=3.2.9",
     "sentence-transformers>=4.1.0",
     "uvicorn>=0.34.3",
 ]
@@ -33,4 +31,13 @@ addopts = "--cov=app --cov-report=term-missing --cov-fail-under=90"
 omit = [
     "*/tests/*",
     "*/__init__.py"
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=8.4.1",
+    "pytest-cov>=6.2.1",
+    "pytest-mock>=3.14.1",
+    "testcontainers>=4.10.0",
 ]

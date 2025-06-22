@@ -4,10 +4,13 @@ from typing import List, Optional
 
 import numpy as np
 import psycopg
+from fastapi import Depends
 from pgvector.psycopg import register_vector
 from psycopg import sql
 from pydantic import BaseModel, BeforeValidator, ConfigDict
 from typing_extensions import Annotated
+
+from app.settings import Settings, get_settings
 
 
 class InsertVector(BaseModel):
@@ -186,8 +189,8 @@ class PgVectorRepository:
 
 @lru_cache(maxsize=1)
 def get_pgvector_repository(
-    db_string: str = "postgresql://user:password@localhost/dbname",
+    settings: Annotated[Settings, Depends(get_settings)],
 ) -> PgVectorRepository:
-    repo = PgVectorRepository(db_string)
+    repo = PgVectorRepository(settings.connection_string)
     repo.create_table()
     return repo

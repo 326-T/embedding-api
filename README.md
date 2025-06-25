@@ -38,6 +38,20 @@ pip install -e .
 ```
 
 ### 4. アプリケーションの起動
+
+#### Docker使用（推奨）
+```bash
+# 全てのサービスを起動（データベース＋アプリケーション）
+docker compose up -d
+
+# ログを確認
+docker compose logs -f
+
+# サービスを停止
+docker compose down
+```
+
+#### ローカル開発環境
 ```bash
 # uvを使用する場合
 uv run uvicorn app.main:app --reload

@@ -10,6 +10,7 @@ from pytest_mock import MockerFixture
 from app.main import app
 from app.repository.pgvector import (
     PgVectorRepository,
+    VectorRecord,
     get_pgvector_repository,
 )
 from app.repository.sentence_transformer import (
@@ -35,16 +36,16 @@ def sentence_transformer_repository(mocker: MockerFixture):
 def pgvector_repository(mocker: MockerFixture):
     repository: Mock = mocker.create_autospec(spec=PgVectorRepository)
     repository.hybrid_search.return_value = [
-        {
-            "id": 1,
-            "category": "test_category",
-            "title": "Test Title",
-            "text": "Test text content",
-            "vector_score": 0.95,
-            "text_score": 0.85,
-            "hibrid_score": 0.90,
-            "created_at": datetime(2024, 1, 1, 12, 0, 0),
-        }
+        VectorRecord(
+            id=1,
+            category="test_category",
+            title="Test Title",
+            text="Test text content",
+            vector_score=0.95,
+            text_score=0.85,
+            hibrid_score=0.90,
+            created_at=datetime(2024, 1, 1, 12, 0, 0),
+        )
     ]
     repository.copy.return_value = None
     app.dependency_overrides[get_pgvector_repository] = lambda: repository

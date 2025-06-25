@@ -7,6 +7,7 @@ FastAPIとPgVectorを使用したテキスト埋め込み・ハイブリッド�
 - **テキスト埋め込み**: 単一またはバッチでテキストをベクトル化
 - **ハイブリッド検索**: ベクトル検索とテキスト検索を組み合わせた高精度検索
 - **カテゴリ検索**: カテゴリ別でのフィルタリング検索
+- **マルチモデル対応**: 複数のSentence Transformerモデルをサポート
 
 ## 📋 必要な環境
 
@@ -46,6 +47,28 @@ python -m uvicorn app.main:app --reload
 ```
 
 アプリケーションは `http://localhost:8000` で起動します。
+
+## 🤖 対応モデル
+
+以下のSentence Transformerモデルに対応しています：
+
+| モデル名 | ベクトル次元 | 説明 |
+|---------|-------------|------|
+| `sentence-transformers/all-MiniLM-L6-v2` | 384 | 軽量で高速（デフォルト） |
+| `sentence-transformers/paraphrase-MiniLM-L6-v2` | 384 | パラフレーズ検索に特化 |
+| `sentence-transformers/all-mpnet-base-v2` | 768 | 高精度モデル |
+| `intfloat/multilingual-e5-large` | 1024 | 多言語対応・高精度 |
+
+### モデルの変更方法
+
+`.env` ファイルで `SENTENCE_TRANSFORMER_MODEL` 環境変数を設定：
+
+```bash
+# 例: 多言語モデルを使用する場合
+SENTENCE_TRANSFORMER_MODEL="intfloat/multilingual-e5-large"
+```
+
+**注意**: モデル変更時はベクトル次元が変わるため、データベースの再構築が必要です。
 
 ## 📝 API仕様
 

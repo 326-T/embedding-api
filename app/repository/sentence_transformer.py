@@ -1,12 +1,15 @@
 from functools import lru_cache
-from typing import Tuple
+from typing import Annotated, Tuple
 
 import numpy as np
+from fastapi import Depends
 from sentence_transformers import SentenceTransformer
+
+from app.settings import Settings, get_settings
 
 
 class SentenceTransformerRepository:
-    def __init__(self, model_name: str = "sentence-transformers/all-MiniLM-L6-v2"):
+    def __init__(self, model_name: str):
         self.model = SentenceTransformer(model_name)
 
     @lru_cache
@@ -20,6 +23,6 @@ class SentenceTransformerRepository:
 
 @lru_cache(maxsize=1)
 def get_sentence_transformer_repository(
-    model_name: str = "sentence-transformers/all-MiniLM-L6-v2",
+    settings: Annotated[Settings, Depends(get_settings)],
 ) -> SentenceTransformerRepository:
-    return SentenceTransformerRepository(model_name)
+    return SentenceTransformerRepository(settings.sentence_transformer_model)
